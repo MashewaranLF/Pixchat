@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Ionic App</title>
+    <title>PixChat</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
@@ -22,6 +22,18 @@
   </script>-->
 
     <link href="build/main.css" rel="stylesheet">
+    <style>
+        .header-bar {
+            background-color: inherit !important;
+        }
+        
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+    </style>
+
 
 </head>
 
@@ -32,18 +44,18 @@
 
     <!-- Paste your settings here!! -->
 
-<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCkWDmI4xy4U3jkW9roEh7vx2hELbFNM70",
-    authDomain: "test-16676.firebaseapp.com",
-    databaseURL: "https://test-16676.firebaseio.com",
-    storageBucket: "test-16676.appspot.com",
-    messagingSenderId: "647223430055"
-  };
-  firebase.initializeApp(config);
-</script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCkWDmI4xy4U3jkW9roEh7vx2hELbFNM70",
+            authDomain: "test-16676.firebaseapp.com",
+            databaseURL: "https://test-16676.firebaseio.com",
+            storageBucket: "test-16676.appspot.com",
+            messagingSenderId: "647223430055"
+        };
+        firebase.initializeApp(config);
+    </script>
 
 
     <!-- cordova.js required for cordova apps -->

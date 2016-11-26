@@ -19,10 +19,10 @@ export class UserAvatarComponent implements OnInit {
         let self = this;
         let firebaseConnected: boolean = self.dataService.isFirebaseConnected(); 
         if (self.user.uid === 'default' || !firebaseConnected) {
-            self.imageUrl = 'assets/avatar/profile.png';
+            self.imageUrl = 'assets/images/profile.png';
             self.imageLoaded = true;
         } else {
-            self.dataService.getStorageRef().child('avatar/' + self.user.uid + '/profile.png').getDownloadURL().then(function (url) {
+            self.dataService.getStorageRef().child('images/' + self.user.uid + '/profile.png').getDownloadURL().then(function (url) {
                 self.imageUrl = url.split('?')[0] + '?alt=media' + '&t=' + (new Date().getTime());
                 self.imageLoaded = true;
             });
@@ -52,6 +52,6 @@ export class UserAvatarComponent implements OnInit {
     getUserImage() {
         var self = this;
 
-        return self.dataService.getStorageRef().child('avatar/' + self.user.uid + '/profile.png').getDownloadURL();
+        return self.dataService.getStorageRef().child('images/' + self.user.uid + '/profile.png').getDownloadURL();
     }
 }

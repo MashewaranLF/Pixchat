@@ -1,6 +1,11 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>New Image</ion-title>
+    <ion-navbar color="secondary">
+        <br>
+        <div style="padding-left: 6px">
+            <ion-title>New Image</ion-title>
+
+        </div>
+        <br>
         <ion-buttons start>
             <button ion-button (click)="cancelNewThread()">
         <ion-icon name="arrow-back"></ion-icon>  Cancel
@@ -11,15 +16,22 @@
 
 <ion-content padding>
     <form [formGroup]="createThreadForm" (ngSubmit)="onSubmit(createThreadForm.value)">
+
         <ion-item [class.error]="!title.valid && title.touched">
             <ion-label floating>Title</ion-label>
             <ion-input type="text" value="" [formControl]="title"></ion-input>
+
         </ion-item>
+        <div style="float:right;padding:5px 10px 5px">
+            <button ion-button round (click)="openImageOptions()"><ion-icon name="camera"></ion-icon></button>
+        </div>
         <div *ngIf="title.hasError('required') && title.touched" class="error-box">* Title is required.</div>
+
         <ion-item [class.error]="!question.valid && question.touched">
             <ion-label floating>Question</ion-label>
-            <ion-textarea [formControl]="question" rows="6"></ion-textarea>
+            <ion-textarea [formControl]="question" rows="3"></ion-textarea>
         </ion-item>
+
         <div *ngIf="question.hasError('required') && question.touched" class="error-box">* Question is required.</div>
         <div *ngIf="question.hasError('minlength') && question.touched" class="error-box">* Type at least 100 characters.</div>
         <ion-item>
@@ -34,6 +46,7 @@
         </ion-item>
         <div *ngIf="category.hasError('minlength')" class="error-box">* Select at least one category.</div>
         <br/><br/>
+
         <button ion-button type="submit" class="custom-button" [disabled]="!createThreadForm.valid" block>Submit</button>
     </form>
 </ion-content>
