@@ -74,7 +74,7 @@ export class DataService {
                 let thread: IThread = {
                     key: null,
                     title: 'Welcome to Forum!',
-                    question: 'Congratulations! It seems that you have successfully setup the Forum app.',
+                    desc: 'Congratulations! It seems that you have successfully setup the Forum app.',
                     category: 'welcome',
                     dateCreated: new Date().toString(),
                     user: { uid: 'default', username: 'Administrator' },

@@ -88,7 +88,7 @@ export class MainPage implements OnInit {
           let thread: IThread = {
             key: data.rows.item(i).key,
             title: data.rows.item(i).title,
-            question: data.rows.item(i).question,
+            desc: data.rows.item(i).desc,
             category: data.rows.item(i).category,
             dateCreated: data.rows.item(i).datecreated,
             user: { uid: data.rows.item(i).user, username: data.rows.item(i).username },

@@ -72,7 +72,7 @@ export class SqliteService {
                     console.log(data.rows.item(i));
                     console.log(data.rows.item(i).key);
                     console.log(data.rows.item(i).title);
-                    console.log(data.rows.item(i).question);
+                    console.log(data.rows.item(i).desc);
                 }
             } else {
                 console.log('no threads found..');
@@ -148,7 +148,7 @@ export class SqliteService {
         self.db.executeSql(query, [
             thread.key,
             thread.title,
-            thread.question,
+            thread.desc,
             thread.category,
             thread.dateCreated,
             thread.user.uid,

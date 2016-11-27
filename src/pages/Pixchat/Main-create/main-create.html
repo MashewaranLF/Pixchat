@@ -22,13 +22,10 @@
                     <ion-item [class.error]="!title.valid && title.touched" class="titlebar">
                         <ion-label floating>Title</ion-label>
                         <ion-input type="text" value="" [formControl]="title"></ion-input>
-
-
                     </ion-item>
-
                 </ion-col>
                 <ion-col width-20>
-                    <button ion-button large (click)="openImageOptions()" class="cambutton "><ion-icon name="camera"></ion-icon></button>
+                    <button ion-button full (click)="openImageOptions()" class="cambutton "><ion-icon name="camera"></ion-icon></button>
                 </ion-col>
 
             </ion-row>
@@ -43,23 +40,22 @@
             </ion-col>
 
             <ion-col>
-                <ion-item [class.error]="!question.valid && question.touched">
+                <ion-item [class.error]="!desc.valid && desc.touched">
                     <ion-label floating>Description</ion-label>
-                    <ion-textarea [formControl]="question" rows="3"></ion-textarea>
+                    <ion-textarea [formControl]="desc" rows="3"></ion-textarea>
                 </ion-item>
 
-                <div *ngIf="question.hasError('required') && question.touched" class="error-box">* Question is required.</div>
-                <div *ngIf="question.hasError('minlength') && question.touched" class="error-box">* Type at least 100 characters.</div>
+                <div *ngIf="desc.hasError('required') && desc.touched" class="error-box">* Description is required.</div>
+                <div *ngIf="desc.hasError('minlength') && desc.touched" class="error-box">* Type at least 100 characters.</div>
             </ion-col>
             <ion-col>
                 <ion-item>
                     <ion-label>Category</ion-label>
                     <ion-select multiple="false" [formControl]="category">
-                        <ion-option value="components" checked="true">Components</ion-option>
-                        <ion-option value="native">Native</ion-option>
-                        <ion-option value="theming">Theming</ion-option>
-                        <ion-option value="ionicons">Ionicons</ion-option>
-                        <ion-option value="cli">CLI</ion-option>
+                        <ion-option value="Fashion" checked="true">Fashion</ion-option>
+                        <ion-option value="Food">Food</ion-option>
+                        <ion-option value="Technology">Technology</ion-option>
+                        <ion-option value="Etc.">Etc.</ion-option>
                     </ion-select>
                 </ion-item>
                 <div *ngIf="category.hasError('minlength')" class="error-box">* Select at least one category.</div>

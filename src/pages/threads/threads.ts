@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, ModalController, ToastController, Content, Events } from 'ionic-angular';
 
 import { IThread } from '../../shared/interfaces';
-import { ThreadCreatePage } from '../thread-create/thread-create';
 import { ThreadCommentsPage } from '../thread-comments/thread-comments';
 import { AuthService } from '../../shared/services/auth.service';
 import { DataService } from '../../shared/services/data.service';
@@ -10,6 +9,7 @@ import { MappingsService } from '../../shared/services/mappings.service';
 import { ItemsService } from '../../shared/services/items.service';
 import { SqliteService } from '../../shared/services/sqlite.service';
 
+import { MainCreatePage } from '../pixchat/main-create/main-create';
 @Component({
   templateUrl: 'threads.html'
 })
@@ -88,7 +88,7 @@ export class ThreadsPage implements OnInit {
           let thread: IThread = {
             key: data.rows.item(i).key,
             title: data.rows.item(i).title,
-            question: data.rows.item(i).question,
+            desc: data.rows.item(i).desc,
             category: data.rows.item(i).category,
             dateCreated: data.rows.item(i).datecreated,
             user: { uid: data.rows.item(i).user, username: data.rows.item(i).username },
@@ -239,7 +239,7 @@ export class ThreadsPage implements OnInit {
 
   createThread() {
     var self = this;
-    let modalPage = this.modalCtrl.create(ThreadCreatePage);
+    let modalPage = this.modalCtrl.create(MainCreatePage);
 
     modalPage.onDidDismiss((data: any) => {
       if (data) {

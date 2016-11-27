@@ -15,7 +15,7 @@ export class MainCreatePage implements OnInit {
 
   createThreadForm: FormGroup;
   title: AbstractControl;
-  question: AbstractControl;
+  desc: AbstractControl;
   category: AbstractControl;
 
   constructor(public nav: NavController,
@@ -29,13 +29,13 @@ export class MainCreatePage implements OnInit {
   ngOnInit() {
     console.log('in Main create..');
     this.createThreadForm = this.fb.group({
-      'title': ['', Validators.compose([Validators.required, Validators.minLength(8)])],
-      'question': ['', Validators.compose([Validators.required, Validators.minLength(10)])],
+      'title': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      'desc': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'category': ['', Validators.compose([Validators.required, Validators.minLength(1)])]
     });
 
     this.title = this.createThreadForm.controls['title'];
-    this.question = this.createThreadForm.controls['question'];
+    this.desc = this.createThreadForm.controls['desc'];
     this.category = this.createThreadForm.controls['category'];
   }
 
@@ -65,7 +65,7 @@ export class MainCreatePage implements OnInit {
           let newThread: IThread = {
             key: null,
             title: thread.title,
-            question: thread.question,
+            desc: thread.desc,
             category: thread.category,
             user: { uid: uid, username: username },
             dateCreated: new Date().toString(),

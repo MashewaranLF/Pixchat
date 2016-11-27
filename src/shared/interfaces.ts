@@ -1,7 +1,7 @@
 export interface IThread {
     key: string;
     title: string;
-    question: string;
+    desc: string;
     category: string;
     dateCreated: string;
     user: IUser;

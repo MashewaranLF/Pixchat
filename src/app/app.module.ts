@@ -11,7 +11,6 @@ import { ProfilePage } from '../pages/profile/profile';
 import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ThreadCommentsPage } from '../pages/thread-comments/thread-comments';
-import { ThreadCreatePage } from '../pages/thread-create/thread-create';
 import { ThreadsPage } from '../pages/threads/threads';
 
 
@@ -40,7 +39,6 @@ import { APP_PROVIDERS } from '../providers/app.providers';
     SignupPage,
     TabsPage,
     ThreadCommentsPage,
-    ThreadCreatePage,
     ThreadsPage,
     ThreadComponent,
     UserAvatarComponent
@@ -64,7 +62,6 @@ import { APP_PROVIDERS } from '../providers/app.providers';
     SignupPage,
     TabsPage,
     ThreadCommentsPage,
-    ThreadCreatePage,
     ThreadsPage
   ],
   providers: [APP_PROVIDERS]
