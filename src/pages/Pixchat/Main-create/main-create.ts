@@ -16,7 +16,9 @@ export class MainCreatePage implements OnInit {
   createThreadForm: FormGroup;
   title: AbstractControl;
   desc: AbstractControl;
-  category: AbstractControl;
+  category: AbstractControl;  
+  ImageUpload: Blob;
+  imgurl:string;
 
   constructor(public nav: NavController,
     public loadingCtrl: LoadingController,
@@ -24,14 +26,15 @@ export class MainCreatePage implements OnInit {
     public fb: FormBuilder,
     public authService: AuthService,
     public actionSheeCtrl: ActionSheetController,
+    //private ImageUpload: Blob,
     public dataService: DataService) { }
-
+    
   ngOnInit() {
     console.log('in Main create..');
     this.createThreadForm = this.fb.group({
       'title': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
       'desc': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'category': ['', Validators.compose([Validators.required, Validators.minLength(1)])]
+      'category': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
 
     this.title = this.createThreadForm.controls['title'];
@@ -61,10 +64,14 @@ export class MainCreatePage implements OnInit {
         self.dataService.getTotalThreads().then(function (snapshot) {
           let currentNumber = snapshot.val();
           let newPriority: number = currentNumber === null ? 1 : (currentNumber + 1);
+          //!! need to check condition not uplaoad
+          
+          thread.imgurl = this.imgurl;
 
           let newThread: IThread = {
             key: null,
             title: thread.title,
+            imgurl: thread.Imgurl,
             desc: thread.desc,
             category: thread.category,
             user: { uid: uid, username: username },
@@ -155,7 +162,10 @@ export class MainCreatePage implements OnInit {
       };
 
       let capturedImage: Blob = b64toBlob(imageData, 'image/png');
-      self.startUploading(capturedImage);
+      // start 
+
+      //this.ImageUpload = capturedImage;
+       self.startUploading(capturedImage); //upload on submit instread  need to create func update img card
     }, error => {
       console.log('ERROR -> ' + JSON.stringify(error));
     });
@@ -175,11 +185,11 @@ export class MainCreatePage implements OnInit {
     // Upload file and metadata to the object 'images/mountains.jpg'
     var metadata = {
       contentType: 'image/png',
-      name: 'profile.png',
+      name: 'thread.png',
       cacheControl: 'no-cache',
     };
 
-    var uploadTask = self.dataService.getStorageRef().child('images/' + uid + '/profile.png').put(file, metadata);
+    var uploadTask = self.dataService.getStorageRef().child('tmp/' + uid + '/threadimg.png').put(file, metadata);
 
     // Listen for state changes, errors, and completion of the upload.
     uploadTask.on('state_changed',
@@ -190,24 +200,25 @@ export class MainCreatePage implements OnInit {
         loader.dismiss().then(() => {
           switch (error.code) {
             case 'storage/unauthorized':
-              // User doesn't have permission to access the object
+              console.log("User doesn't have permission to access the object");
               break;
 
             case 'storage/canceled':
-              // User canceled the upload
+              console.log("User canceled the upload");
               break;
 
             case 'storage/unknown':
-              // Unknown error occurred, inspect error.serverResponse
+              console.log("Unknown error occurred, inspect error.serverResponse");
               break;
           }
         });
       }, function () {
         loader.dismiss().then(() => {
           // Upload completed successfully, now we can get the download URL
-          var downloadURL = uploadTask.snapshot.downloadURL;
-          self.dataService.setUserImage(uid);
-
+          console.log("Upload URL : "+uploadTask.snapshot.downloadURL);
+          this.imgurl =  uploadTask.snapshot.downloadURL;
+          return uploadTask.snapshot.downloadURL;
+          
         });
       });
   }

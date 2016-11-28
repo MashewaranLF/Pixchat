@@ -89,6 +89,7 @@ export class ThreadsPage implements OnInit {
             key: data.rows.item(i).key,
             title: data.rows.item(i).title,
             desc: data.rows.item(i).desc,
+            imgurl :  data.rows.item(i).imgurl,
             category: data.rows.item(i).category,
             dateCreated: data.rows.item(i).datecreated,
             user: { uid: data.rows.item(i).user, username: data.rows.item(i).username },
