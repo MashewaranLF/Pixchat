@@ -73,8 +73,9 @@ export class DataService {
 
                 let thread: IThread = {
                     key: null,
-                    title: 'Welcome to Forum!',
-                    desc: 'Congratulations! It seems that you have successfully setup the Forum app.',
+                    title: 'Welcome to pixchat!',
+                    desc: 'Congratulations',
+                    imgurl:'LOL',
                     category: 'welcome',
                     dateCreated: new Date().toString(),
                     user: { uid: 'default', username: 'Administrator' },
@@ -83,7 +84,7 @@ export class DataService {
 
                 let firstThreadRef = self.threadsRef.push();
                 firstThreadRef.setWithPriority(thread, 1).then(function (dataShapshot) {
-                    console.log('Congratulations! You have created the first thread!');
+                    console.log('pixchat!');
                 });
             }
             console.log('commited', snapshot.val());

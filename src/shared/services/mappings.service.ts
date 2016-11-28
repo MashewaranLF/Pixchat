@@ -21,6 +21,7 @@ export class MappingsService {
                 key: key,
                 title: thread.title,
                 desc: thread.desc,
+                imgurl: thread.imgurl,
                 category: thread.category,
                 dateCreated: thread.dateCreated,
                 user: { uid: thread.user.uid, username: thread.user.username },
@@ -36,6 +37,7 @@ export class MappingsService {
         let thread: IThread = {
             key: key,
             title: snapshot.title,
+            imgurl: snapshot.imgurl,
             desc: snapshot.desc,
             category: snapshot.category,
             dateCreated: snapshot.dateCreated,

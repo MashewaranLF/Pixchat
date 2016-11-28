@@ -1,6 +1,7 @@
 export interface IThread {
     key: string;
     title: string;
+    imgurl: string;
     desc: string;
     category: string;
     dateCreated: string;
