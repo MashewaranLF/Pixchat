@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActionSheetController, ModalController, ToastController, LoadingController, NavParams, Content } from 'ionic-angular';
 
-import { CommentCreatePage } from '../comment-create/comment-create';
+import { CommentCreatePage } from '../../comment-create/comment-create';
 import { IComment } from '../../../shared/interfaces';
 import { AuthService } from '../../../shared/services/auth.service';
 import { DataService } from '../../../shared/services/data.service';

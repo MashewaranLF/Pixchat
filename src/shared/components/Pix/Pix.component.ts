@@ -19,7 +19,7 @@ export class PixComponent implements OnInit {
         let self = this;
         let firebaseConnected: boolean = self.dataService.isFirebaseConnected(); 
         if (self.user.uid === 'default' || !firebaseConnected) {
-            self.imageUrl = 'assets/images/pix.png';
+            self.imageUrl = 'images/profile.png';
             self.imageLoaded = true;
         } else {
             self.dataService.getStorageRef().child('images/' + self.user.uid + '/pix.png').getDownloadURL().then(function (url) {
@@ -52,6 +52,6 @@ export class PixComponent implements OnInit {
     getUserImage() {
         var self = this;
 
-        return self.dataService.getStorageRef().child('images/' + self.user.uid + '/pix.png').getDownloadURL();
+        return self.dataService.getStorageRef().child('images/' + self.user.uid + '/profile.png').getDownloadURL();
     }
 }

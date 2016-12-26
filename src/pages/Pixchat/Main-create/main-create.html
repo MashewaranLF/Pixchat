@@ -25,7 +25,9 @@
                     </ion-item>
                 </ion-col>
                 <ion-col width-20>
-                    <button ion-button full (click)="openImageOptions()" class="cambutton "><ion-icon name="camera"></ion-icon></button>
+                    <button ion-button full (click)="openImageThreadOptions()" class="cambutton ">
+                        <ion-icon name="camera"></ion-icon>
+                    </button>
                 </ion-col>
 
             </ion-row>
@@ -35,7 +37,8 @@
 
             <ion-col>
                 <ion-card>
-                    <img src="http://i.4cdn.org/i/1480117550986.png" />
+
+                    <img src='{{Fimgurl}}' />
                 </ion-card>
             </ion-col>
 

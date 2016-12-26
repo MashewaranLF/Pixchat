@@ -14,6 +14,8 @@ import { ThreadCommentsPage } from '../pages/thread-comments/thread-comments';
 import { ThreadsPage } from '../pages/threads/threads';
 
 
+
+
 import { MainCommentsPage } from '../pages/pixchat/main-comments/main-comments';
 import { MainCreatePage } from '../pages/pixchat/main-create/main-create';
 import { MainPage } from '../pages/pixchat/Main/main';
@@ -21,9 +23,12 @@ import { MainPage } from '../pages/pixchat/Main/main';
 import { ThreadComponent } from '../shared/components/thread.component';
 import { UserAvatarComponent } from '../shared/components/user-avatar.component';
 
+
+
 import { MainComponent } from '../shared/components/Main/main.component';
 // providers
 import { APP_PROVIDERS } from '../providers/app.providers';
+
 
 @NgModule({
   declarations: [

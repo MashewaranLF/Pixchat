@@ -12,7 +12,7 @@ import { SignupPage } from '../pages/signup/signup';
 
 
 import { MainPage } from '../pages/pixchat/Main/main';
-
+import {Firebaseimgurl} from '../shared/services/firebaseimg.service';
 
 declare var window: any;
 

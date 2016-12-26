@@ -7,6 +7,7 @@ import { Camera, CameraOptions } from 'ionic-native';
 import { IThread } from '../../../shared/interfaces';
 import { AuthService } from  '../../../shared/services/auth.service';
 import { DataService } from '../../../shared/services/data.service';
+import {Firebaseimgurl} from '../../../shared/services/firebaseimg.service';
 
 @Component({
   templateUrl: 'main-create.html'
@@ -18,7 +19,7 @@ export class MainCreatePage implements OnInit {
   desc: AbstractControl;
   category: AbstractControl;  
   ImageUpload: Blob;
-  imgurl:string;
+  imgUrl:string = "errrrr";
 
   constructor(public nav: NavController,
     public loadingCtrl: LoadingController,
@@ -26,9 +27,15 @@ export class MainCreatePage implements OnInit {
     public fb: FormBuilder,
     public authService: AuthService,
     public actionSheeCtrl: ActionSheetController,
-    //private ImageUpload: Blob,
-    public dataService: DataService) { }
+    private firebaseimgurl:Firebaseimgurl,
+    public dataService: DataService) {}
     
+    
+
+    get Fimgurl() {
+        return this.firebaseimgurl.getValue;
+    }
+
   ngOnInit() {
     console.log('in Main create..');
     this.createThreadForm = this.fb.group({
@@ -47,16 +54,19 @@ export class MainCreatePage implements OnInit {
   }
 
   onSubmit(thread: any): void {
+    console.log('submit');
     var self = this;
-    if (this.createThreadForm.valid) {
 
+
+    if (this.createThreadForm.valid) {
       let loader = this.loadingCtrl.create({
         content: 'Posting thread...',
         dismissOnPageChange: true
       });
-
+      console.log('loading preset');
       loader.present();
-
+      console.log('loading submit');
+    
       let uid = self.authService.getLoggedInUser().uid;
       self.dataService.getUsername(uid).then(function (snapshot) {
         let username = snapshot.val();
@@ -66,12 +76,10 @@ export class MainCreatePage implements OnInit {
           let newPriority: number = currentNumber === null ? 1 : (currentNumber + 1);
           //!! need to check condition not uplaoad
           
-          thread.imgurl = this.imgurl;
-
           let newThread: IThread = {
             key: null,
             title: thread.title,
-            imgurl: thread.Imgurl,
+            imgurl: this.Firebaseimgurl.getval(),
             desc: thread.desc,
             category: thread.category,
             user: { uid: uid, username: username },
@@ -99,7 +107,7 @@ export class MainCreatePage implements OnInit {
   }
 
   
-  openImageOptions() {
+  openImageThreadOptions() {
     var self = this;
 
     let actionSheet = self.actionSheeCtrl.create({
@@ -163,9 +171,7 @@ export class MainCreatePage implements OnInit {
 
       let capturedImage: Blob = b64toBlob(imageData, 'image/png');
       // start 
-
-      //this.ImageUpload = capturedImage;
-       self.startUploading(capturedImage); //upload on submit instread  need to create func update img card
+      self.startUploading(capturedImage); //upload on submit instread  need to create func update img card
     }, error => {
       console.log('ERROR -> ' + JSON.stringify(error));
     });
@@ -189,13 +195,16 @@ export class MainCreatePage implements OnInit {
       cacheControl: 'no-cache',
     };
 
-    var uploadTask = self.dataService.getStorageRef().child('tmp/' + uid + '/threadimg.png').put(file, metadata);
+    //!! Image Replace themself on firebase
+    var uploadTask = self.dataService.getStorageRef().child('threads/' + uid +'/temp.png').put(file, metadata);
 
+    console.log('gen upload task');
     // Listen for state changes, errors, and completion of the upload.
     uploadTask.on('state_changed',
       function (snapshot) {
         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
         progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('progress'+progress);
       }, function (error) {
         loader.dismiss().then(() => {
           switch (error.code) {
@@ -213,14 +222,23 @@ export class MainCreatePage implements OnInit {
           }
         });
       }, function () {
-        loader.dismiss().then(() => {
+        loader.dismiss().then(() => { 
+          console.log(uploadTask.snapshot.downloadURL);
+    
+          this.Firebaseimgurl.setval(uploadTask.snapshot.downloadURL);
+           console.log(this.Firebaseimgurl.getval());
           // Upload completed successfully, now we can get the download URL
-          console.log("Upload URL : "+uploadTask.snapshot.downloadURL);
-          this.imgurl =  uploadTask.snapshot.downloadURL;
-          return uploadTask.snapshot.downloadURL;
+          //console.log('Upload URL : '+ this.uploadTask.snapshot.downloadURL);
+          //return uploadTask.snapshot.downloadURL;
           
         });
       });
   }
+
+
+
+//-addd-------------------------------------------------------------- 
+
+
 
 }
