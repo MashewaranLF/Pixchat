@@ -1,0 +1,9 @@
+diff a/src/pages/Pixchat/Main-create/main-create.ts b/src/pages/Pixchat/Main-create/main-create.ts	(rejected hunks)
+@@ -27,6 +27,7 @@
+     public fb: FormBuilder,
+     public authService: AuthService,
+     public actionSheeCtrl: ActionSheetController,
++<<<<<<< HEAD
+     private firebaseimgurl:Firebaseimgurl,
+     public dataService: DataService) {}
+     

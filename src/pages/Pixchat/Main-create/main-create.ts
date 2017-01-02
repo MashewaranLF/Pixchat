@@ -33,7 +33,7 @@ export class MainCreatePage implements OnInit {
     
 
     get Fimgurl() {
-        return this.firebaseimgurl.getValue;
+        return this.firebaseimgurl.getval();
     }
 
   ngOnInit() {
@@ -65,7 +65,7 @@ export class MainCreatePage implements OnInit {
       });
       console.log('loading preset');
       loader.present();
-      console.log('loading submit');
+     
     
       let uid = self.authService.getLoggedInUser().uid;
       self.dataService.getUsername(uid).then(function (snapshot) {
@@ -75,11 +75,18 @@ export class MainCreatePage implements OnInit {
           let currentNumber = snapshot.val();
           let newPriority: number = currentNumber === null ? 1 : (currentNumber + 1);
           //!! need to check condition not uplaoad
+          console.log('s2');
+
+          this.imgUrl = this.Firebaseimgurl.getval();
+
+          console.log("Firebaseimgurl = "+this.Firebaseimgurl.getval());
+          console.log("imgUrl = "+this.imgUrl);
+
           
           let newThread: IThread = {
             key: null,
             title: thread.title,
-            imgurl: this.Firebaseimgurl.getval(),
+            imgurl: this.imgUrl,
             desc: thread.desc,
             category: thread.category,
             user: { uid: uid, username: username },
@@ -223,10 +230,11 @@ export class MainCreatePage implements OnInit {
         });
       }, function () {
         loader.dismiss().then(() => { 
-          console.log(uploadTask.snapshot.downloadURL);
+          //console.log(uploadTask.snapshot.downloadURL);
     
-          this.Firebaseimgurl.setval(uploadTask.snapshot.downloadURL);
+          //this.Firebaseimgurl.setval(this.uploadTask.snapshot.downloadURL);
            console.log(this.Firebaseimgurl.getval());
+           this.imgUrl =  this.Firebaseimgurl.getval();
           // Upload completed successfully, now we can get the download URL
           //console.log('Upload URL : '+ this.uploadTask.snapshot.downloadURL);
           //return uploadTask.snapshot.downloadURL;

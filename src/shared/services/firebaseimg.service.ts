@@ -6,11 +6,11 @@ export class Firebaseimgurl {
 
     constructor() {}
 
-    setValue(val) {
+    setval(val) {
         this.myUrl = val;
     }
 
-    getValue() {
+    getval() {
         return this.myUrl;
     }
 }
